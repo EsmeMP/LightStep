@@ -2,18 +2,22 @@
 <html lang="es">
 <head>
     <!-- {% load static %} -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %} {% endblock %}</title>
-    {% load %}
+    <!-- {% load %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    <script>
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script> -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'theme/css/dist/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- <script>
       tailwind.config = {
         plugins: [daisyui],
       };
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/daisyui@3.8.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/daisyui@3.8.0"></script> -->
 </head>
 <body>
     <div class="navbar bg-base-100">
@@ -75,7 +79,7 @@
 
       {% endblock %}
       
-      <footer class="footer footer-center bg-primary text-primary-content p-10">
+      <footer class="footer footer-center  bg-pink-200 text-primary-content p-10">
         <aside>
           <svg
             width="50"
@@ -133,5 +137,12 @@
           </div>
         </nav>
       </footer>
+      <button class="btn btn-primary">Botón DaisyUI</button>
+
+<input type="text" placeholder="Escribe aquí" class="input input-bordered w-full max-w-xs" />
+
+<div class="bg-blue-500 text-white p-5">
+  <h1 class="text-xl font-bold">¡Hola, Mundo!</h1>
+</div>
 </body>
 </html>
