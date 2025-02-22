@@ -1,4 +1,7 @@
 {% extends "base.html" %}
+<!-- Incluye GSAP y ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
 {% block title %} Inicio {% endblock %}
 {% block extra_css %}
@@ -28,11 +31,11 @@
     }
 
     .box {
-        width: 5px;
-        height: 5px;
+        width: 8px;
+        height: 8px;
         background: #ffffff;
         opacity: 0; /* Oculto inicialmente */
-        box-shadow: 5px 5px 10px 5px #fff6f4;
+        box-shadow: 5px 5px 170px 5px #fff6f4, 5px 5px 100px 5px #fff6f4 ;
         border-radius: 50%;
     }
 
@@ -40,97 +43,275 @@
         background: transparent !important; /* Desactiva los cuadros internos */
     }
 
+    #seccion2 {
+        /* width: 100vw; */
+        height: 100vh;
+    }
+
+    .images {
+  padding-top: 20vh;
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: flex-start;
+  align-items: center;
+  gap: 40px;
+  z-index: 1;
+}
+
+/* 🔹 Imágenes */
+.image-container {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* 🔹 Tarjetas */
+.card {
+  width: 200px;
+  height: 400px; /* Más alto que las imágenes */
+  padding: 20px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: transform 0.3s ease-out;
+  /* background: #d20000; */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+/* 🔹 Desplazamiento alterno de elementos */
+.offset-up {
+  transform: translateY(-50px);
+}
+
+.offset-down {
+  transform: translateY(50px);
+}
+
+/* 🌟 Ajuste para pantallas pequeñas */
+@media (max-width: 768px) {
+  .offset-up, .offset-down {
+    transform: translateY(0); /* Sin desplazamiento en móviles */
+  }
+}
+
+.oval {
+    width: 200px;
+    height: 400px;
+    border-radius: 90px;
+    /* background: linear-gradient(to right, #ff4500, #d336e0, #8b2cdf); */
+    background: linear-gradient(to right, #ff6f00, #c728d6, #730db5);
+
+
+    position: absolute;
+    z-index: -1;
+}
+
+.left {
+    transform: rotate(-30deg);
+}
+
+.right {
+    transform: rotate(30deg);
+}
+.card{
+    position: relative;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 </style>
 {% endblock %}
 
 
 {% block content %}
-<div class="flex flex-col md:flex-row justify-between items-center w-full px-5 md:px-10">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-5 md:px-10 pb-52 seccion">
     <div class="text-left p-10 md:p-20 lg:p-40">
         <h3 class="text-lg font-semibold">¡Conócenos!</h3>
         <h2 class="text-2xl font-bold">Light</h2>
         <h1 class="text-4xl font-extrabold">Step</h1>
+        <div>
+            <button class="btn btn-outline bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 text-white border-0 hover:from-purple-600 hover:to-orange-400" onclick="scrollToSection()">¡Entra Ya!</button>
+        </div>
     </div>
-    <div id="container" class="w-full md:w-1/2 h-40 pl-5 md:pl-10 lg:pl-28"></div>
     <div class="flex items-center gap-4 mt-5">
         <label for="colorPicker" class="text-white font-semibold">Elige un color:</label>
         <input type="color" id="colorPicker" class="w-10 h-10 border-2 border-white rounded-full">
+        <button id="rainbowEffect" class="px-4 py-2 bg-blue-600 text-white rounded-lg">🌈 Arcoíris</button>
     </div>
+    <div id="container" class="w-full md:w-1/2 h-40 pl-5 md:pl-10 lg:pl-28"></div>
     
 </div>
+<div class="h-96 w-full bg-gradient-to-r from-orange-400 via-pink-500 to-purple-60">.</div>
 
+<div id="wrapper">
+    <div id="content">
+        <div id="seccion2" class="seccion">
+            <div class="images">
+                
+                <!-- Imagen 1 (Desplazada arriba) -->
+                <div class="image-container offset-up">
+                    <img src="https://images.unsplash.com/photo-1609166214994-502d326bafee?auto=format&fit=crop&w=400&q=80" alt="Imagen 1">
+                </div>
 
+                <!-- Tarjeta 1 (Desplazada abajo) -->
+                <div class="card offset-down">
+                    <h3>Da Clic Aquí para descargar la App</h3>
+                    <div class="oval left"></div>
+                    <div class="oval right"></div>
+                </div>
 
-<div>
-    <button class="btn btn-outline bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 text-white border-0 hover:from-purple-600 hover:to-orange-400">¡Entra Ya!</button>
-</div>
-<div class="flex w-full flex-col">
-    <div class="card bg-base-300 grid h-20 place-items-center bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 text-purple-50">Aplicación</div>
-</div>
-<div class="flex w-full flex-col lg:flex-row">
-    <div class="card bg-base-300 rounded-box grid h-32 flex-grow place-items-center">
-        <h3>Da Clic Aquí para descargar la App</h3>
+                <!-- Imagen 2 (Desplazada arriba) -->
+                <div class="image-container offset-up">
+                    <img src="https://images.unsplash.com/photo-1514689832698-319d3bcac5d5?auto=format&fit=crop&w=400&q=80" alt="Imagen 2">
+                </div>
+
+                <!-- Tarjeta 2 (Desplazada abajo) -->
+                <div class="card offset-down">
+                    <p>Lorem ipsum dolor sit amet consectetur...</p>
+                    <div class="oval left"></div>
+                    <div class="oval right"></div>
+                </div>
+
+                <!-- Imagen 3 (Desplazada arriba) -->
+                <div class="image-container offset-up">
+                    <img src="https://images.unsplash.com/photo-1514689832698-319d3bcac5d5?auto=format&fit=crop&w=400&q=80" alt="Imagen 3">
+                </div>
+
+            </div>
+        </div>
     </div>
-    <div class="card bg-base-300 rounded-box grid h-32 flex-grow place-items-center">
-        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus officiis alias totam sint natus impedit accusantium a maiores unde itaque, eius est aliquam officia tenetur facilis, perferendis accusamus iusto labore.</p>
-    </div>
 </div>
+
+
+
+
+
 {% endblock %}
 
 {% block scripts %}
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-    const container = document.getElementById("container");
-    const colorPicker = document.getElementById("colorPicker");
-    const filas = 10; 
-    const columnas = 10; 
+        const container = document.getElementById("container");
+        const colorPicker = document.getElementById("colorPicker");
+        const rainbowButton = document.getElementById("rainbowEffect");
+        const filas = 15; 
+        const columnas = 10; 
+        let colores = ["#ffffff", "#00ff00", "#ff0000", "#82f8f3", "#ff00ff", "#ffff00", "#4513ee"]; // Verde, Rojo, Azul, Morado, Amarillo
 
-    // Crear las filas y columnas
-    for (let i = 0; i < filas; i++) {
-        let row = document.createElement("div");
-        row.classList.add("row");
-        row.style.marginLeft = `${i * 10}px`; // Escalera
+        // Crear las filas y columnas con efecto escalera
+        for (let i = 0; i < filas; i++) {
+            let row = document.createElement("div");
+            row.classList.add("row");
+            row.style.marginLeft = `${i * 15}px`;
 
-        for (let j = 0; j < columnas; j++) {
-            let div = document.createElement("div");
-            div.classList.add("box");
+            for (let j = 0; j < columnas; j++) {
+                let div = document.createElement("div");
+                div.classList.add("box");
 
-            if (j !== 0 && j !== columnas - 1) {
-                div.classList.add("inactive");
+                if (j !== 0 && j !== columnas - 1) {
+                    div.classList.add("inactive");
+                }
+
+                row.appendChild(div);
             }
-
-            row.appendChild(div);
+            container.appendChild(row);
         }
-        container.appendChild(row);
-    }
 
-    // Animación con GSAP
-    gsap.to(".box:not(.inactive)", {
-        opacity: 1,
-        duration: 0.5,
-        stagger: {
-            each: 0.2,
-            from: "start"
-        },
-        ease: "power2.out",
-        scrollTrigger: {
-            trigger: "#container",
-            start: "top 80%",
-            toggleActions: "play none none none"
-        }
-    });
-
-    // Escuchar cambios en el input de color
-    colorPicker.addEventListener("input", function () {
-        let selectedColor = colorPicker.value;
-        document.querySelectorAll(".box:not(.inactive)").forEach(box => {
-            box.style.backgroundColor = selectedColor;
-            box.style.boxShadow = `5px 5px 20px ${selectedColor}, -5px -5px 20px ${selectedColor}, 10px 10px 20px ${selectedColor}, -10px -10px 20px ${selectedColor}, 20px 20px 20px ${selectedColor}, -20px -20px 20px ${selectedColor}, 25px 15px 20px ${selectedColor}, -25px -15px 20px ${selectedColor}, 30px 15px 20px ${selectedColor}, -30px -15px 20px ${selectedColor}`;
+        // Animación con GSAP
+        gsap.to(".box:not(.inactive)", {
+            opacity: 1,
+            duration: 2,
+            stagger: {
+                each: 0.4,
+                from: "start"
+            },
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: "#container",
+                start: "top 80%",
+                toggleActions: "play none none none"
+            }
         });
+
+        // Función para asignar colores en escalera
+        function aplicarColores() {
+            document.querySelectorAll(".row").forEach((row, index) => {
+                let colorIndex = Math.floor(index / 2) % colores.length; // Cambia cada dos filas
+                let colorActual = colores[colorIndex];
+
+                row.querySelectorAll(".box:not(.inactive)").forEach(box => {
+                    box.style.backgroundColor = colorActual;
+                    box.style.boxShadow = `10px 10px 100px 15px ${colorActual}`;
+                });
+            });
+        }
+
+        // Evento para personalizar color
+        colorPicker.addEventListener("input", function () {
+            let selectedColor = colorPicker.value;
+            document.querySelectorAll(".box:not(.inactive)").forEach(box => {
+                box.style.backgroundColor = selectedColor;
+                box.style.boxShadow = `10px 10px 100px 15px ${selectedColor}`;
+            });
+        });
+
+        // Evento para activar el efecto arcoíris
+        rainbowButton.addEventListener("click", aplicarColores);
+
+        // Aplicar colores iniciales en escalera
+        aplicarColores();
+
+    });
+    
+
+    document.addEventListener("DOMContentLoaded", function () {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Aplica el efecto parallax a imágenes y tarjetas de texto
+    gsap.utils.toArray(".images .card, .images .image-container").forEach(el => {
+        let speed = el.getAttribute("data-speed") || 1;
+        gsap.fromTo(el, 
+            { y: "-50%" }, 
+            { 
+                y: "50%", 
+                ease: "none",
+                scrollTrigger: {
+                    trigger: el,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: 3  
+                }
+            }
+        );
     });
 });
 
+// Función para desplazamiento suave
+function scrollToSection() {
+    document.getElementById("seccion2").scrollIntoView({ behavior: "smooth" });
+}
 </script>
 {% endblock %}
 
