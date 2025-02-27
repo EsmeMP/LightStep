@@ -1,24 +1,3 @@
-// document.addEventListener("DOMContentLoaded", () => {
-//     gsap.to(".box", {
-//         x: 200,
-//         duration: 1,
-//         repeat: -1,
-//         yoyo: true
-//     });
-// });
-
-// window.onload = function () {
-//     gsap.to(".title", { x: 200 });
-  
-//     gsap.to(".title", { 
-//       rotation: 360,
-//       x: 300,
-//       xPercent: -100,
-//       duration: 2,
-//       repeat: 2,
-//       yoyo: true,
-//     });
-//   };
 
 window.onload = function (){
     gsap.to(".logo", { x: 150,
@@ -44,7 +23,7 @@ let colors = [
     duration: 1.4, 
     delay: 0.5,
     repeat: colors.length - 2, // Se repite solo hasta llegar al rosa
-    yoyo: false, // No queremos que retroceda automáticamente
+    yoyo: false, 
     onRepeat: function() {
       colorIndex = (colorIndex + 1) % colors.length; // Alternar entre los colores en orden
       document.querySelector(".title").style.setProperty("text-shadow", colors[colorIndex], "important");
@@ -56,4 +35,6 @@ let colors = [
       document.querySelector(".title").style.setProperty("text-shadow", colors[2], "important"); // Se queda en rosa
     }
   });
+
+
 // //  Animation

@@ -26,9 +26,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('base', views.base),
-    path('AcercaDelProyecto', views.acerca),
-    path('Contacto', views.contacto),
-    path('SobreNosotros', views.nosotros),
+    path('AcercaDelProyecto', views.acerca, name='acerca'),
+    path('Contacto', views.contacto , name='contacto'),
+    path('proyecto', views.proyecto, name='proyecto'),
+    path('SobreNosotros', views.nosotros, name='nosotros'),
 ]
 
 if settings.DEBUG:

@@ -12,5 +12,8 @@ def acerca(request):
 def contacto(request):
     return render(request, "contacto.html", {})
 
+def proyecto(request):
+    return render(request, "proyecto.html", {})
+
 def nosotros(request):
     return render(request, "sobreNosotros.html", {})
