@@ -12,6 +12,12 @@ def acerca(request):
 def contacto(request):
     return render(request, "contacto.html", {})
 
+def costos(request):
+    return render(request, "costos.html", {})
+
+def funcionamiento(request):
+    return render(request, "funcionamiento.html", {})
+
 def proyecto(request):
     return render(request, "proyecto.html", {})
 
