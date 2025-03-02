@@ -303,18 +303,26 @@ h1 {
 
 </style>
 
+{% if messages %}
+        <div id="success-message" class="alert alert-success">
+            {% for message in messages %}
+                <p class="text-xl text-center ">{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
 <div class="contact-container">
     <div class="contact-form">
         <h2  class="text-3xl font-bold inline-block px-8 py-3 shadow-lg bg-black gradient-border">Escríbenos</h2>
-        <form method="POST" action="/contacto/">
+        <form method="POST" action="{% url 'contacto' %}">
             {% csrf_token %}
             <div class="input-group">
                 <input type="text" placeholder="Nombre" name="nombre">
                 <input type="text" placeholder="Apellido" name="apellido">
             </div>
             <div class="input-group">
-                <input type="text" placeholder="Número de teléfono" name="telefono">
-                <input type="email" placeholder="Correo" name="correo">
+                <input type="text" placeholder="Número de teléfono" name="telefono" pattern="[0-9]*" inputmode="numeric">
+                <input type="email" placeholder="Correo" name="correo" required>
             </div>
             <textarea placeholder="Mensaje" name="mensaje"></textarea>
         
@@ -335,4 +343,19 @@ h1 {
     </div>
 </div>
 <br><br><br><br><br>
+
+    
+    <script>
+        // Verifica si hay un mensaje de éxito
+        window.onload = function() {
+            var successMessage = document.getElementById('success-message');
+            if (successMessage) {
+                // Establece un temporizador para ocultar el mensaje después de 2 segundos (2000 milisegundos)
+                setTimeout(function() {
+                    successMessage.style.display = 'none';
+                }, 2000);
+            }
+        }
+    </script>
+
 {% endblock %}
